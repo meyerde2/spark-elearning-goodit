@@ -1,34 +1,32 @@
-spark-template-freemarker 
+spark-elearning-goodit
 ==============================================
 
-How to use the FreeMarker template route for Spark example:
+How to deploy the application to external jetty?
+- delete the main()-method
+- add "implements SparkApplication" to "public class Application"
+- enable the init()-method.
 
 ```java
-import java.util.HashMap;
-import java.util.Map;
 
-import org.junit.Test;
+public class Application implements SparkApplication{
 
-import junit.framework.Assert;
-import spark.ModelAndView;
-import spark.template.freemarker.FreeMarkerEngine;
 
-import static spark.Spark.get;
+    public static UserDao userDao;
+    public static GameDao gameDao;
+    public static  FreeMarkerEngine freeMarkerEngine;
 
-public class FreeMarkerExample {
+@Override
+    public void init() {
+        Spark.staticFileLocation("/public");
+        DebugScreen.enableDebugScreen();
 
-    public static void main(String args[]) {
+        freeMarkerEngine = new FreeMarkerEngine();
+        Configuration freeMarkerConfiguration = new Configuration();
 
-        get("/hello", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
+        freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(Application.class, "/public/templates/"));
+        freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
 
-            // The hello.ftl file is located in directory:
-            // src/test/resources/spark/template/freemarker
-            return new ModelAndView(attributes, "hello.ftl");
-        }, new FreeMarkerEngine());
-
+        .....
     }
 
-}
 ```
