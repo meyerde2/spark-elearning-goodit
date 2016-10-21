@@ -1,0 +1,33 @@
+.row{
+margin-top: 50px;
+}
+
+.navLogout{
+
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+
+}
+
+.logoutLi a:hover, .logoutLi a:focus{
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+
+footer{
+
+    background-color: #333;
+    min-height: 200px;
+}
+
+#footer2 {
+    background-color: #1d1d1d;
+    height: 20px;
+}
