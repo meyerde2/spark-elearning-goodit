@@ -1,11 +1,12 @@
 <#import "/masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="">
 
-   <h2>Administrationsbereich - Unternehmensplanspiel</h2>
+   <h1>${msg.get("PLANSPIEL_HEADING_CONTROL")}</h1>
+
 <div class="panel panel-default">
   <div class="panel-body">
   <h3>${msg.get("PLANSPIEL_TABLE_HEADING")}</h3>
-
+<div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -28,7 +29,7 @@
 				        Inaktiv
 				    </#if>
 				</td>
-				<td><a href="/question/${question.getId()}/">bearbeiten</td>
+				<td><a href="/question/${question.getId()}/"><span class="glyphicon glyphicon-pencil"></span></td>
 
 			  </tr>
 			</#items>
@@ -37,7 +38,7 @@
 		</#list>
     </tbody>
   </table>
-
+</div>
 </div>
 </div>
 
@@ -51,13 +52,13 @@
 
             <div class="form-group">
                 <label for="newSituation" class="">${msg.get("PLANSPIEL_NEW_SITUATION")}</label>
-                <textarea class="form-control" rows="5" name="situation" id="situation" placeholder="${msg.get("PLANSPIEL_NEW_SITUATION")}"></textarea>
+                <textarea class="form-control" rows="5" name="situation" id="situation" placeholder="${msg.get("PLANSPIEL_NEW_SITUATION")}" required></textarea>
 
             </div>
 
             <div class="form-group">
                 <label for="question">${msg.get("PLANSPIEL_NEW_QUESTION")}</label>
-                <textarea class="form-control" rows="2" name="question" id="question" placeholder="${msg.get("PLANSPIEL_NEW_QUESTION")}"></textarea>
+                <textarea class="form-control" rows="2" name="question" id="question" placeholder="${msg.get("PLANSPIEL_NEW_QUESTION")}" required></textarea>
 
             </div>
 

@@ -89,13 +89,15 @@ public class UserDaoImpl implements UserDao{
         int lastOpengameId;
 
         String sql = "SELECT opengameId FROM games " +
-                "WHERE userId =" + getUserByUsername(username).getId()
-                + " ORDER BY id DESC LIMIT 1;";
+                " WHERE userId =" + getUserByUsername(username).getId() +
+                " ORDER BY id DESC LIMIT 1;";
 
         try (Connection con = sql2o.open()) {
 
             lastOpengameId = Integer.parseInt(con.createQuery(sql).executeScalar().toString());
 
+        }catch (Exception e){
+            return 0;
         }
 
         return lastOpengameId;
@@ -104,7 +106,13 @@ public class UserDaoImpl implements UserDao{
     @Override
     public boolean updateUser(User user) {
 
-        String updateSql = "UPDATE users SET firstname = :firstname, lastname= :lastname, salt = :salt, hashedPassword = :hashedPassword, role = :role WHERE username = :username";
+        String updateSql = "UPDATE users SET " +
+                "firstname = :firstname, " +
+                "lastname= :lastname, " +
+                "salt = :salt, " +
+                "hashedPassword = :hashedPassword, " +
+                "role = :role " +
+                "WHERE username = :username";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(updateSql)

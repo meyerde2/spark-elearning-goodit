@@ -21,10 +21,13 @@ import static app.util.RequestUtil.*;
 public class LoginController {
     public static Route serveLoginPage = (Request request, Response response) -> {
 
+
         System.out.println("Hello Login");
 
         Map attributes = new HashMap<>();
         attributes.putAll(ViewUtil.getTemplateVariables(request));
+        attributes.put("currentPage", "login");
+
 
         return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.LOGIN));
     };
@@ -41,6 +44,10 @@ public class LoginController {
 
         System.out.println("Login authenticationSucceeded = true");
         attributes.put("authenticationSucceeded", true);
+
+        //test
+        request.session().removeAttribute("loggedOut");
+
 
         request.session().attribute("currentUser", getQueryUsername(request));
 

@@ -1,5 +1,9 @@
 .row{
-margin-top: 50px;
+    margin-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:20px;
+
 }
 
 .navLogout{
@@ -21,13 +25,29 @@ margin-top: 50px;
 }
 
 
-footer{
-
-    background-color: #333;
-    min-height: 200px;
+.answers div{
+    margin:10px;
 }
 
-#footer2 {
-    background-color: #1d1d1d;
-    height: 20px;
+
+.container{
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -142px;
+}
+.container:after {
+  content: "";
+  display: block;
+}
+.footer, .container:after {
+  height: 142px;
+}
+
+.footer{
+    background-color: #e7e7e7;
+}
+.footer div{
+    width: 200px;
+    margin: 0 auto;
+    padding-top: 70px;
 }

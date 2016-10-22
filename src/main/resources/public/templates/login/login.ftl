@@ -1,35 +1,50 @@
 <#import "/masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="Login">
 
-  hello world login
+      <h1>${msg.get("LOGIN_HEADING")}</h1>
+
 
   <form id="loginForm" method="post">
-      <#if authenticationFailed??>
+      <#if authenticationFailed?? && authenticationFailed?c == "true">
           <p class="btn-lg btn-danger bad notification">${msg.get("LOGIN_AUTH_FAILED")}</p>
-      <#elseif authenticationSucceeded??>
+      <#elseif authenticationSucceeded?? && authenticationSucceeded?c =="true">
           <p class="btn-lg btn-success good notification">${msg.get("LOGIN_AUTH_SUCCEEDED")} ${currentUser}</p>
-      <#elseif loggedOut??>
+      <#elseif loggedOut?? && loggedOut?c == "true">
+
           <p class="btn-lg btn-warning notification">${msg.get("LOGIN_LOGGED_OUT")}</p>
       </#if>
-      <h1>${msg.get("LOGIN_HEADING")} - ${msg.get("LOGIN_HEADING")}</h1>
-      <p>${msg.get("LOGIN_INSTRUCTIONS")} .... ${WebPath}/></p>
+
+      <p>${msg.get("LOGIN_INSTRUCTIONS")}</p>
+
+
 
       <div class="form-group">
-          <label for="username">${msg.get("LOGIN_LABEL_USERNAME")}</label>
-          <input type="text" name="username"  class="form-control" placeholder="${msg.get("LOGIN_LABEL_USERNAME")}" value="" required>
+            <label for="username">${msg.get("LOGIN_LABEL_USERNAME")}</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+                </span>
+                <input type="text" name="username"  class="form-control" placeholder="${msg.get("LOGIN_LABEL_USERNAME")}" value="" required>
+            </div>
       </div>
 
       <div class="form-group">
           <label for="password">${msg.get("LOGIN_LABEL_PASSWORD")}</label>
-          <input type="password" name="password" class="form-control" placeholder="${msg.get("LOGIN_LABEL_PASSWORD")}" value="" required>
+          <div class="input-group">
+                <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+                </span>
+                <input type="password" name="password" class="form-control" placeholder="${msg.get("LOGIN_LABEL_PASSWORD")}" value="" required>
+          </div>
           <#if loginRedirect??>
-              <input type="hidden" name="loginRedirect" value="$loginRedirect">
+              <input type="hidden" name="loginRedirect" value="${loginRedirect}">
           </#if>
       </div>
       <div class="form-group">
-          <input type="submit" class="btn btn-primary" value="${msg.get("LOGIN_BUTTON_LOGIN")}">
+        <button type="submit" class="btn btn-primary btn-md">
+            <span class="glyphicon glyphicon-log-in"></span> ${msg.get("LOGIN_BUTTON_LOGIN")}
+        </button>
       </div>
   </form>
-
 
 </@layout.masterTemplate>

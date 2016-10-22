@@ -1,12 +1,11 @@
 <#import "/masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="">
 
-<h1>${msg.get("USER_HEADING")}</h1>
+<h1>${msg.get("USER_HEADING_CONTROL")}</h1>
 
 <div class="panel panel-default">
   <div class="panel-body">
-  <h3>${msg.get("USER_TABLE_HEADLINE")}</h3>
-
+<div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -32,7 +31,7 @@
 					<#if user.getRole() == 1> Admin </#if>
 					<#if user.getRole() == 2> Teilnehmer </#if>
 				</td>
-				<td><a href="/user/${user.getUsername()}/">bearbeiten</a></td>
+				<td><#if currentUser != user.getUsername()><a href="/user/${user.getUsername()}/"><span class="glyphicon glyphicon-pencil"></span></a></#if></td>
 			  </tr>
 			</#items>
 		
@@ -44,7 +43,7 @@
 
     </tbody>
   </table>
-
+</div>
 </div>
 </div>
 
@@ -102,4 +101,4 @@
     </div>
 </form>
 
-#</@layout.masterTemplate>
+</@layout.masterTemplate>

@@ -1,7 +1,8 @@
 <#import "/masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="">
 
-<h1>${msg.get("USER_HEADING")}</h1>
+<h1>${msg.get("USER_HEADING_CONTROL")}</h1>
+<h2>${msg.get("USER_UPDATE")}</h2>
 
 <form action="/updateUser/" id="userForm" method="post">
 

@@ -68,6 +68,8 @@ public class UserController {
             if (clientAcceptsHtml(request)) {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.putAll(ViewUtil.getTemplateVariables(request));
+                attributes.put("currentPage", "usercontrol");
+
 
                 attributes.put("users", userDao.getAllUsers());
 
@@ -130,6 +132,8 @@ public class UserController {
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "usercontrol");
+
 
             User user = userDao.getUserByUsername(getParamUsername(request));
             attributes.put("user", user);

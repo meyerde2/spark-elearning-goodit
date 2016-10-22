@@ -1,17 +1,18 @@
 <#import "/masterTemplate.ftl" as layout />
 <@layout.masterTemplate title="">
 
-   <h2>Administrationsbereich - Unternehmensplanspiel</h2>
-
+<h1>${msg.get("PLANSPIEL_HEADING_CONTROL")}</h1>
 
 <div class="panel panel-default">
   <div class="panel-body">
-  <h3>${msg.get("PLANSPIEL_NEW_HEADING")}</h3>
+  <h2>${msg.get("PLANSPIEL_UPDATE_HEADING")}</h2>
+
 
     <form id="gameForm" action="/updateQuestion/" method="post" class="form-horizontal">
 
         <div class="col-md-8">
 
+            <input type="hidden" name="id" id="id" value="${question.getId()}" required>
             <div class="form-group">
                 <label for="newSituation" class="">${msg.get("PLANSPIEL_NEW_SITUATION")}</label>
                 <textarea class="form-control" rows="5" name="situation" id="situation" placeholder="${msg.get("PLANSPIEL_NEW_SITUATION")}" >${question.getDescription()}</textarea>
@@ -48,7 +49,7 @@
                     <label for="category2">Kategorie 2</label>
                     <select id="category2" name="category2" class="form-control">
                       <optgroup label="Kategorie">
-                        <option value="1" <#if question.getCatId2() == 1> selected </#if>${msg.get("PLANSPIEL_CATEGORY_A")}</option>
+                        <option value="1" <#if question.getCatId2() == 1> selected </#if>>${msg.get("PLANSPIEL_CATEGORY_A")}</option>
                         <option value="2" <#if question.getCatId2() == 2> selected </#if>>${msg.get("PLANSPIEL_CATEGORY_B")}</option>
                         <option value="3" <#if question.getCatId2() == 3> selected </#if>>${msg.get("PLANSPIEL_CATEGORY_C")}</option>
                       </optgroup>

@@ -30,6 +30,7 @@ public class GameController {
         if (clientAcceptsHtml(request)) {
             Map attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "game");
 
 
             String currentUsername = request.session().attribute("currentUser");
@@ -48,6 +49,7 @@ public class GameController {
             }else{
 
                 attributes.put("question", question);
+                attributes.put("questionCount", gameDao.getAllQuestions().size());
 
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAME));
 
@@ -68,6 +70,8 @@ public class GameController {
             if (clientAcceptsHtml(request)) {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.putAll(ViewUtil.getTemplateVariables(request));
+                attributes.put("currentPage", "gamecontrol");
+
 
                 attributes.put("questions", gameDao.getAllQuestions());
 
@@ -127,8 +131,8 @@ public class GameController {
         LoginController.ensureUserIsLoggedIn(request, response);
 
         if (clientAcceptsHtml(request)) {
-            Map<String, Object> attributes = new HashMap<>();
 
+            Map<String, Object> attributes = new HashMap<>();
 
             Question question = gameDao.getQuestionById(Integer.parseInt(request.queryParams("id")));
 
@@ -139,7 +143,29 @@ public class GameController {
             System.out.println("category1:" + request.queryParams("category1"));
             System.out.println("active:" + request.queryParams("active"));
 
-            //question.s
+            question.setDescription(request.queryParams("situation"));
+            question.setQuestion(request.queryParams("question"));
+
+            question.setAnswer1(request.queryParams("answer1"));
+            question.setCatId1(Integer.parseInt(request.queryParams("category1")));
+            question.setAnswer2(request.queryParams("answer2"));
+            question.setCatId2(Integer.parseInt(request.queryParams("category2")));
+            question.setAnswer3(request.queryParams("answer3"));
+            question.setCatId3(Integer.parseInt(request.queryParams("category3")));
+
+            //If not empty
+            if (!request.queryParams("answer4").isEmpty() && !request.queryParams("category4").isEmpty()){
+                question.setAnswer4(request.queryParams("answer4"));
+                question.setCatId4(Integer.parseInt(request.queryParams("category4")));
+            }
+            if (!request.queryParams("answer5").isEmpty() && !request.queryParams("category5").isEmpty()){
+                question.setAnswer5(request.queryParams("answer5"));
+                question.setCatId5(Integer.parseInt(request.queryParams("category5")));
+            }
+
+            //ToDo: Files
+            //question.setFiles();
+            question.setActive(Boolean.parseBoolean(request.queryParams("active")));
 
             gameDao.updateQuestion(question);
 
@@ -162,6 +188,8 @@ public class GameController {
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "gamecontrol");
+
 
             System.out.println("Hello GameScore");
 
@@ -249,19 +277,13 @@ public class GameController {
             String currentUsername = request.session().attribute("currentUser");
 
             //set new openGameId
-
-
             int opengameId = userDao.getLatestOpengameId(currentUsername) + 1 ;
+
             System.out.println("opengamedID im Restart + 1:  " + opengameId);
 
             User currentUser = userDao.getUserByUsername(currentUsername);
 
             userDao.updateOpengameId(currentUser, opengameId);
-
-           // Question question = gameDao.getNextQuestion(currentUsername);
-
-
-           // attributes.put("question", question);
 
             System.out.println("-----------ENDE Restart Game-----------");
             response.redirect(Path.Web.GAME);
@@ -283,6 +305,8 @@ public class GameController {
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "gamecontrol");
+
 
             //getQuestionById
 

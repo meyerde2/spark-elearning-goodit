@@ -34,6 +34,7 @@ public class IndexController {
 
             attributes.put("users", userDao.getAllUserNames());
 
+            attributes.put("currentPage", "index");
             return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.INDEX));
         }
         if (clientAcceptsJson(request)) {

@@ -31,6 +31,8 @@ public class DashboardController {
 
             Map attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "dashboard");
+
 
             attributes.put("users", userDao.getAllUserNames());
             attributes.putAll(ViewUtil.getTemplateVariables(request));

@@ -68,13 +68,48 @@ public class GameDaoImpl implements GameDao{
     @Override
     public boolean updateQuestion(Question question) {
 
-        //ToDo: put
+        String updateSql = "UPDATE questions SET " +
+                " description = :description, question= :question, " +
+                " answer1 = :answer1, catId1 = :catId1," +
+                " answer2 = :answer2, catId2 = :catId2," +
+                " answer3 = :answer3, catId3 = :catId3, " +
+                " answer4 = :answer4, catId4 = :catId4, " +
+                " answer5 = :answer5, catId5 = :catId5, " +
+                " isActive = :isActive  WHERE id = :id";
 
+        System.out.println("getAnswer1:  ________: " + question.getAnswer1());
+        try (Connection con = sql2o.open()) {
 
+            con.createQuery(updateSql)
 
+                    .addParameter("id", question.getId())
+                    .addParameter("description", question.getDescription())
+                    .addParameter("question", question.getQuestion())
 
+                    .addParameter("answer1", question.getAnswer1())
+                    .addParameter("catId1", question.getCatId1())
 
-        return false;
+                    .addParameter("answer2", question.getAnswer2())
+                    .addParameter("catId2", question.getCatId2())
+
+                    .addParameter("answer3", question.getAnswer3())
+                    .addParameter("catId3", question.getCatId3())
+
+                    .addParameter("answer4", question.getAnswer4())
+                    .addParameter("catId4", question.getCatId4())
+
+                    .addParameter("answer5", question.getAnswer5())
+                    .addParameter("catId5", question.getCatId5())
+
+                    .addParameter("isActive", question.isActive())
+
+                    .executeUpdate();
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     @Override
