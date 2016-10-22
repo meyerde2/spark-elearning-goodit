@@ -1,11 +1,12 @@
 package app.game;
 
-import app.Application;
 import app.user.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
+
+import static app.Application.userDao;
 
 /**
  * Created by Dennis on 05.10.2016.
@@ -34,6 +35,7 @@ public class GameDaoImpl implements GameDao{
         try (Connection con = sql2o.open()) {
 
             con.setRollbackOnException(false);
+
 
             con.createQuery(sql)
                     .addParameter("description", question.getDescription())
@@ -67,6 +69,11 @@ public class GameDaoImpl implements GameDao{
     public boolean updateQuestion(Question question) {
 
         //ToDo: put
+
+
+
+
+
         return false;
     }
 
@@ -87,7 +94,7 @@ public class GameDaoImpl implements GameDao{
         List<Game> gameList;
         List<Question> questionList;
 
-        User user = Application.userDao.getUserByUsername(username);
+        User user = userDao.getUserByUsername(username);
 
         int userId = user.getId();
 
@@ -126,13 +133,13 @@ public class GameDaoImpl implements GameDao{
         List<Game> gameList;
         List<Question> questionList;
 
-        User user = Application.userDao.getUserByUsername(username);
+        User user = userDao.getUserByUsername(username);
 
         int userId = user.getId();
 
-        System.out.println("userId:  " + userId);
+        System.out.println("userId:  " + userId + " - - - - openGameID:  " +user.getOpenGameId());
 
-        String sqlGame = "SELECT * FROM games where userId =" + userId +" AND openGameId = " + user.getOpenGameId() + " ;";
+        String sqlGame = "SELECT * FROM games WHERE userId =" + userId +" AND openGameId = " + user.getOpenGameId() + " ;";
 
         try (Connection conn = sql2o.open()) {
 
@@ -148,7 +155,14 @@ public class GameDaoImpl implements GameDao{
                 i = gameList.size();
             }
 
-            if (gameList.size() >= questionList.size()){
+            System.out.println("gameListSize:  " + gameList.size());
+
+
+            if (gameList.size() == 0){
+                System.out.println("gameList == 0 ");
+                //pretty bad if you want to control the game by isActive parameter
+                return getQuestionById(1);
+            }else if (gameList.size() >= questionList.size()){
                 //Planspiel nun durchgespielt.
                 System.out.println("Planspiel durchgespielt");
                 return null;

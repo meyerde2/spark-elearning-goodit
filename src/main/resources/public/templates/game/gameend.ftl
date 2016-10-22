@@ -1,7 +1,7 @@
 <#import "/masterTemplate.ftl" as layout />
-<@layout.masterTemplate title="">
+<@layout.masterTemplate title="Gameend">
 
-    <h1>$msg.get("INDEX_HEADING")</h1>
+    <h1>${msg.get("INDEX_HEADING")}</h1>
     <h2>Unternehmensplanspiel</h2>
 
     Planspiel nicht gestartet.

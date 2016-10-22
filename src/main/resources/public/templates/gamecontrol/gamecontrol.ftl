@@ -11,21 +11,30 @@
       <tr>
         <th>ID</th>
         <th>Frage</th>
-        <th>Antworten</th>
         <th>Aktiv?</th>
         <th>bearbeiten</th>
       </tr>
     </thead>
     <tbody>
-     #foreach($question in $questions)
-        <tr>
-        <td>$question.getId()</td>
-        <td>$question.getQuestion()</td>
-        <td>$question.isActive()</td>
-        <td>$question.isActive()</td>
-        <td><a href="/question/$question.getId()/">bearbeiten</td>
-        </tr>
-    #end
+		<#list questions>
+			<#items as question>
+			  <tr>
+				<td>${question.getId()}</td>
+				<td>${question.getQuestion()}</td>
+				<td>
+				    <#if question.isActive()>
+				        Aktiv
+				    <#else>
+				        Inaktiv
+				    </#if>
+				</td>
+				<td><a href="/question/${question.getId()}/">bearbeiten</td>
+
+			  </tr>
+			</#items>
+		<#else>
+		  <p>No questions
+		</#list>
     </tbody>
   </table>
 

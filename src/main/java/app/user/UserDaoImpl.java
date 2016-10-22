@@ -78,6 +78,8 @@ public class UserDaoImpl implements UserDao{
                     .addParameter("openGameId", opengameId)
                     .executeUpdate();
         }
+
+        getAllUsers();
         return true;
     }
 

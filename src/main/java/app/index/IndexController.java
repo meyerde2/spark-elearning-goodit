@@ -30,9 +30,9 @@ public class IndexController {
 
             System.out.println("IndexController serveIndexPage");
             Map attributes = new HashMap<>();
+            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             attributes.put("users", userDao.getAllUserNames());
-            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.INDEX));
         }

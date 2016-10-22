@@ -29,7 +29,7 @@ public class RequestUtil {
     }
 
     public static String getParamQuestionId(Request request) {
-        return request.params("id ");
+        return request.params("id");
     }
 
     public static String getParamUsername(Request request){

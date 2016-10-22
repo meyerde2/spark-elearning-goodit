@@ -19,19 +19,29 @@
       </tr>
     </thead>
     <tbody>
-     #foreach($user in $users)
-        <tr>
-        <td>$user.getId()}</td>
-        <td>$user.getUsername()}</td>
-        <td>$user.getFirstname()}</td>
-        <td>$user.getLastname()}</td>
-        <td>
-            #if($user.getRole() == 1) Admin #end
-            #if($user.getRole() == 2) Teilnehmer #end
-        </td>
-        <td><a href="/user/$user.getUsername()/">bearbeiten</a></td>
-        </tr>
-    #end
+	
+		<#list users>
+		
+			<#items as user>
+			  <tr>
+				<td>${user.getId()}</td>
+				<td>${user.getUsername()}</td>
+				<td>${user.getFirstname()}</td>
+				<td>${user.getLastname()}</td>
+				<td>				
+					<#if user.getRole() == 1> Admin </#if>
+					<#if user.getRole() == 2> Teilnehmer </#if>
+				</td>
+				<td><a href="/user/${user.getUsername()}/">bearbeiten</a></td>
+			  </tr>
+			</#items>
+		
+		<#else>
+		
+		  <p>No users
+		  
+		</#list>
+
     </tbody>
   </table>
 

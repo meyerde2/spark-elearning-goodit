@@ -16,7 +16,7 @@
 
     <form id="answer" name="answer" action="/gamescore/" method="post">
 
-        <input type="hidden" name="id" value="$question.getId()">
+        <input type="hidden" name="id" value="${question.getId()}">
 
         <div class="answers">
             <div>
@@ -25,16 +25,17 @@
             </div>
             <div>
                 <label class="radio-inline"><input type="radio" name="answer" value="3">${question.getAnswer3()}</label>
-				${question.getAnswer4()}
-                    <label class="radio-inline"><input type="radio" name="answer" value="4">${question.getAnswer4()}</label>
 
+                <#if question.getAnswer4()?has_content>
+                    <label class="radio-inline"><input type="radio" name="answer" value="4">${question.getAnswer4()}</label>
+                </#if>
             </div>
 
-            ${question.getAnswer5()}
+            <#if question.getAnswer5()?has_content>
                 <div>
                     <label class="radio-inline"><input type="radio" name="answer" value="5">${question.getAnswer5()}</label>
                 </div>
-
+            </#if>
         </div>
 
         <div class="form-group">

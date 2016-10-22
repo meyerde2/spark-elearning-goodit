@@ -87,6 +87,7 @@ public class GameController {
 
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
+            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             System.out.println("before object-parsing");
 
@@ -121,12 +122,46 @@ public class GameController {
     };
 
 
+    public static Route updateQuestion = (Request request, Response response) -> {
+
+        LoginController.ensureUserIsLoggedIn(request, response);
+
+        if (clientAcceptsHtml(request)) {
+            Map<String, Object> attributes = new HashMap<>();
+
+
+            Question question = gameDao.getQuestionById(Integer.parseInt(request.queryParams("id")));
+
+            System.out.println("-------------- Question-Update -----------------");
+            System.out.println("situation:" + request.queryParams("situation"));
+            System.out.println("question:" + request.queryParams("question"));
+            System.out.println("answer1:" + request.queryParams("answer1"));
+            System.out.println("category1:" + request.queryParams("category1"));
+            System.out.println("active:" + request.queryParams("active"));
+
+            //question.s
+
+            gameDao.updateQuestion(question);
+
+            response.redirect(Path.Web.GAMECONTROL);
+
+            return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAMECONTROL));
+        }
+        if (clientAcceptsJson(request)) {
+            return dataToJson(userDao.getAllUserNames());
+        }
+        return ViewUtil.notAcceptable.handle(request, response);
+    };
+
+
+
 
     public static Route evaluateGameScore = (Request request, Response response) -> {
         LoginController.ensureUserIsLoggedIn(request, response);
 
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
+            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             System.out.println("Hello GameScore");
 
@@ -209,6 +244,7 @@ public class GameController {
 
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
+            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             String currentUsername = request.session().attribute("currentUser");
 
@@ -222,11 +258,12 @@ public class GameController {
 
             userDao.updateOpengameId(currentUser, opengameId);
 
-            Question question = gameDao.getNextQuestion(currentUsername);
+           // Question question = gameDao.getNextQuestion(currentUsername);
 
 
-            attributes.put("question", question);
+           // attributes.put("question", question);
 
+            System.out.println("-----------ENDE Restart Game-----------");
             response.redirect(Path.Web.GAME);
             return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAME));
 
@@ -245,6 +282,7 @@ public class GameController {
 
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
+            attributes.putAll(ViewUtil.getTemplateVariables(request));
 
             //getQuestionById
 

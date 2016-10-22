@@ -1,21 +1,26 @@
 package app.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by Dennis on 29.09.2016.
  */
 
-
+@Data
+@AllArgsConstructor
 public class User {
 
-    int id;
-    String username;
-    String firstname;
-    String lastname;
-    String salt;
-    String hashedPassword;
-    int role;
-    int openGameId;
-
+    @Getter @Setter int id;
+    @Getter @Setter String username;
+    @Getter @Setter String firstname;
+    @Getter @Setter String lastname;
+    @Getter @Setter String salt;
+    @Getter @Setter String hashedPassword;
+    @Getter @Setter int role;
+    @Getter @Setter int openGameId;
 
     public User(int id, String username, String salt, String hashedPassword) {
         this.id = id;
@@ -28,67 +33,4 @@ public class User {
         this.openGameId = 0;
     }
 
-    public User(int id, String username, String firstname, String lastname, String salt, String hashedPassword,  int role, int openGameId){
-        this.id = id;
-        this.username = username;
-        this.salt = salt;
-        this.hashedPassword = hashedPassword;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-        this.openGameId = openGameId;
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public String getHashedPassword() {
-        return hashedPassword;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public int getOpenGameId() {
-        return openGameId;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
 }

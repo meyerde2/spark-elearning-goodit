@@ -47,16 +47,16 @@
 
                             <li class="dropdown-header">Account</li>
 
-                            #if($currentUser)
+                            <#if currentUser?has_content>
                             <li class="logoutLi">
                                 <form method="post" action="${WebPath.getLOGOUT()}" name="logout" id="logout">
-                                    <a id="logout" href="#" class="navLogout" onclick="document.getElementById('logout').submit();">${msg.get("COMMON_NAV_LOGOUT")}  ($currentUser)</a>
+                                    <a id="logout" href="#" class="navLogout" onclick="document.getElementById('logout').submit();">${msg.get("COMMON_NAV_LOGOUT")}  (${currentUser})</a>
                                 </form>
                             </li>
 
-                            #else
+                            <#else>
                                 <li><a href="${WebPath.getLOGIN()}">${msg.get("COMMON_NAV_LOGIN")}</a></li>
-                            #end
+                            </#if>
                         </ul>
 
                         </li>

@@ -12,6 +12,7 @@ import spark.Route;
 import java.util.HashMap;
 import java.util.Map;
 
+import static app.Application.userDao;
 import static app.util.RequestUtil.*;
 
 /**
@@ -47,8 +48,11 @@ public class LoginController {
         if (getQueryLoginRedirect(request) != null) {
             response.redirect(getQueryLoginRedirect(request));
         }
+
+        attributes.put("users", userDao.getAllUserNames());
+
         response.redirect(Path.Web.INDEX);
-        return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.LOGIN));
+        return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.INDEX));
     };
 
     public static Route handleLogoutPost = (Request request, Response response) -> {
