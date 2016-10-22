@@ -42,6 +42,8 @@ public class Application {
     public static void main(String args[]) {
 
             Spark.staticFileLocation("/public");
+
+            //Test
             DebugScreen.enableDebugScreen();
 
             freeMarkerEngine = new FreeMarkerEngine();
