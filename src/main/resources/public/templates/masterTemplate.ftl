@@ -45,8 +45,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>  Administrationsbereich<span class="caret"></span></a>
 
                         <ul class="dropdown-menu">
-                            <li <#if currentPage?? && currentPage == "usercontrol"> class="active"</#if>><a href="${WebPath.getUSERCONTROL()}"><span class="glyphicon glyphicon-user"></span>  ${msg.get("COMMON_NAV_USERCONTROL")}</a></li>
-                            <li <#if currentPage?? && currentPage == "gamecontrol"> class="active"</#if>><a href="${WebPath.getGAMECONTROL()}"><span class="glyphicon glyphicon-play"></span>  ${msg.get("COMMON_NAV_GAMECONTROL")}</a></li>
+                            <li <#if currentPage?? && currentPage == "usercontrol"> class="active"</#if> <#if currentRole?? && currentRole == 2> class="not-activeAnchor" </#if> ><a href="${WebPath.getUSERCONTROL()}"><span class="glyphicon glyphicon-user"></span>  ${msg.get("COMMON_NAV_USERCONTROL")}</a></li>
+                            <li <#if currentPage?? && currentPage == "gamecontrol"> class="active"</#if> <#if currentRole?? && currentRole == 2> class="not-activeAnchor" </#if> ><a href="${WebPath.getGAMECONTROL()}"><span class="glyphicon glyphicon-play"></span>  ${msg.get("COMMON_NAV_GAMECONTROL")}</a></li>
 
                             <li role="separator" class="divider"></li>
 

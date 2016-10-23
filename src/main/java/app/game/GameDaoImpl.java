@@ -1,5 +1,6 @@
 package app.game;
 
+import app.dashboard.GameResult;
 import app.user.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -211,6 +212,20 @@ public class GameDaoImpl implements GameDao{
     }
 
     @Override
+    public List<Game> getAllQuestionsOfCurrentGame(int userId, int openGameId) {
+        List<Game> currentGameList;
+
+        String sqlGame = "SELECT * FROM games WHERE userId =" + userId +" AND openGameId = " + openGameId + " ;";
+
+        try (Connection conn = sql2o.open()) {
+
+            currentGameList = conn.createQuery(sqlGame).executeAndFetch(Game.class);
+
+        }
+        return currentGameList;
+    }
+
+    @Override
     public Question getQuestionById(int id) {
 
         try (Connection conn = sql2o.open()) {
@@ -245,5 +260,32 @@ public class GameDaoImpl implements GameDao{
             return false;
         }
 
+    }
+
+    @Override
+    public boolean saveGameResult(GameResult gameResult) {
+
+        //ToDo: openGameId zu gameId abändern!
+
+        String sql =
+                "INSERT INTO gameresult(userId, result, openGameId) " +
+                        "VALUES (:userId, :result, :openGameId);";
+
+        try (Connection con = sql2o.open()) {
+
+            con.setRollbackOnException(false);
+
+            con.createQuery(sql)
+                    .addParameter("userId", gameResult.getUserId())
+                    .addParameter("result", gameResult.getResult())
+                    .addParameter("openGameId", gameResult.getOpengameId())
+                    .executeUpdate();
+
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
     }
 }

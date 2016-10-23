@@ -29,7 +29,7 @@ public final class Path {
         public static final String GAMECONTROL = "gamecontrol/gamecontrol.ftl";
         public static final String GAME = "game/game.ftl";
         public static final String DASHBOARD = "dashboard/dashboard.ftl";
-        public static final String NOT_FOUND = "notFound.vm";
+        public static final String NOT_FOUND = "notFound.ftl";
         public static final String GAMEEND = "game/gameend.ftl";
         public static final String UPDATEQUESTION = "gamecontrol/updateQuestion.ftl";
         public static final String UPDATEUSER = "usercontrol/updateUser.ftl";

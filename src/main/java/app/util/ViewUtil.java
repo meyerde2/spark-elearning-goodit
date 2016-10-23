@@ -12,6 +12,7 @@ import spark.template.velocity.VelocityTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+import static app.Application.userDao;
 import static app.util.RequestUtil.*;
 
 public class ViewUtil {
@@ -66,7 +67,14 @@ public class ViewUtil {
 
         attributes.put("msg", new MessageBundle(getSessionLocale(request)));
 
-        attributes.put("currentUser", getSessionCurrentUser(request));
+        String username = getSessionCurrentUser(request);
+
+        attributes.put("currentUser", username);
+        System.out.println("userdao;:  " +userDao);
+
+        if (username != null && !username.isEmpty() && userDao != null){
+            attributes.put("currentRole", userDao.getUserByUsername(getSessionCurrentUser(request)).getRole());
+        }
 
         attributes.put("WebPath", new Path.Web()); // Access application URLs from templates
 

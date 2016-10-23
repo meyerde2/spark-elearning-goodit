@@ -80,7 +80,7 @@ public class UserController {
                 return dataToJson(userDao.getAllUserNames());
             }
 
-        return ViewUtil.notAcceptable.handle(request, response);
+        return ViewUtil.forbidden.handle(request, response);
     };
 
 

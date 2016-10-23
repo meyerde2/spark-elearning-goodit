@@ -7,9 +7,10 @@
 
     <p>Wollen Sie das Planspiel (erneut) durchlaufen?</p>
     <form action="/restartGame/" method="post">
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" name="submit"  id"submit" value="Planspiel starten" />
-        </div>
+        <button type="submit" class="btn btn-primary btn-md">
+            <span class="glyphicon glyphicon-play"></span> Planspiel starten
+        </button>
+
     </form>
 
 </@layout.masterTemplate>

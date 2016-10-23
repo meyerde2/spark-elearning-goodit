@@ -29,7 +29,7 @@ public class DashboardDaoImpl implements DashboardDao {
 
         User user = Application.userDao.getUserByUsername(username);
 
-        String sqlGame = "SELECT * FROM games WHERE userId =" + user.getId() +"AND openGameId= " + user.getOpenGameId() + ";";
+        String sqlGame = "SELECT * FROM games WHERE userId =" + user.getId() +" AND openGameId=" + user.getOpenGameId() + ";";
 
 
         try (Connection conn = sql2o.open()) {
@@ -40,6 +40,7 @@ public class DashboardDaoImpl implements DashboardDao {
 
         if (gameList.size() >=1){
 
+            //return the last played question
             return gameList.get(gameList.size() -1) ;
 
         }else{
@@ -107,5 +108,20 @@ public class DashboardDaoImpl implements DashboardDao {
         }
 
         return numberOfQuestions;
+    }
+
+    @Override
+    public int getTotalNumberOfAllPlayedGames() {
+
+        int totalNumberOfAllPlayedGames;
+
+        try (Connection conn = sql2o.open()) {
+
+            String sqltotalNumberOfAllPlayedQuestions = "SELECT COUNT(id) FROM games WHERE questionId = 1";
+            totalNumberOfAllPlayedGames = Integer.parseInt(conn.createQuery(sqltotalNumberOfAllPlayedQuestions).executeScalar().toString());
+
+        }
+
+        return totalNumberOfAllPlayedGames;
     }
 }

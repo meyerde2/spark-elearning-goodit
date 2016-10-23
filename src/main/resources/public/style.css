@@ -18,6 +18,14 @@
 
 }
 
+.not-activeAnchor{
+   cursor: not-allowed;
+}
+
+.not-activeAnchor a{
+  pointer-events: none;
+}
+
 .logoutLi a:hover, .logoutLi a:focus{
     color: #262626;
     text-decoration: none;
@@ -29,19 +37,22 @@
     margin:10px;
 }
 
-
+.progress{
+    width: 100%
+}
+/*
 .container{
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -142px;
+  /*margin-bottom: -142px;*/
 }
+/*
 .container:after {
   content: "";
   display: block;
 }
-.footer, .container:after {
-  height: 142px;
-}
+*/
+
 
 .footer{
     background-color: #e7e7e7;

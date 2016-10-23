@@ -19,4 +19,6 @@ public interface DashboardDao {
 
     //Diagramm 1: Aktuller Spielfortschritt
     int getNumberOfAllQuestions();
+
+    int getTotalNumberOfAllPlayedGames();
 }

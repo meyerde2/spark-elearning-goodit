@@ -1,6 +1,7 @@
 package app.game;
 
 import app.Application;
+import app.dashboard.GameResult;
 import app.login.LoginController;
 import app.user.User;
 import app.util.Path;
@@ -11,6 +12,7 @@ import spark.Response;
 import spark.Route;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static app.Application.gameDao;
@@ -243,9 +245,22 @@ public class GameController {
                 //opengameId = 0 zurückdrehen
                 userDao.updateOpengameId(currentUser, 0);
 
-                //ToDo: Ermittlung des Gesamtergebnisses
+                //get all Questions of the current Game
+                List<Game> currentGameList = gameDao.getAllQuestionsOfCurrentGame(currentUser.getId(), currentGame.getOpengameId());
 
-                //ToDo: Insert in gameresult mit dem Gesamtergebnis aller Fragen
+                double d = 0;
+
+                for (Game game : currentGameList) {
+                    d += game.getResult();
+                }
+
+                d = d / currentGameList.size();
+
+                int gameResultValue = ((int) Math.round(d));
+
+                GameResult gameResult = new GameResult(0, currentUser.getId(), currentGame.getOpengameId(), gameResultValue);
+
+                gameDao.saveGameResult(gameResult);
 
                 System.out.println("Keine weiteren Fragen verfügbar.");
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAMEEND));
@@ -273,6 +288,7 @@ public class GameController {
         if (clientAcceptsHtml(request)) {
             Map<String, Object> attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
+            attributes.put("currentPage", "game");
 
             String currentUsername = request.session().attribute("currentUser");
 

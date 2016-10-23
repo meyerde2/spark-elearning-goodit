@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package spark.template.freemarker;
+package app.util;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

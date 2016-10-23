@@ -1,6 +1,7 @@
 import app.dashboard.DashboardDao;
 import app.dashboard.DashboardDaoImpl;
 import app.dashboard.PlayedQuestion;
+import app.game.Game;
 import app.game.GameDao;
 import app.game.GameDaoImpl;
 import app.user.UserDao;
@@ -48,5 +49,31 @@ public class UnitTest {
         System.out.println("numberOfAllQuestions:  " + dashboardDao.getNumberOfAllQuestions());
     }
 
+
+    @Test
+    public void testGameResult() {
+
+        String DB_URL = "jdbc:mysql://localhost:3306/goodIT";
+        String USER = "root";
+        String PASS = "";
+        Sql2o sql2o = new Sql2o(DB_URL, USER, PASS);
+
+        GameDao gameDao = new GameDaoImpl(sql2o);
+        DashboardDao dashboardDao = new DashboardDaoImpl(sql2o);
+
+        List<Game> currentGameList = gameDao.getAllQuestionsOfCurrentGame(1, 23);
+
+
+        double d = 0;
+        for (Game game : currentGameList) {
+            d += game.getResult();
+        }
+
+        d = d / currentGameList.size();
+
+        int gameResultValue = ((int) Math.round(d));
+
+        System.out.println("filter:  " + dashboardDao.getAllGameResults().stream().filter(g -> (g.getResult() == 1)).count());
+    }
 
 }

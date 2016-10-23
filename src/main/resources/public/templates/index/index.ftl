@@ -6,7 +6,7 @@
 
  <div>
     <p>
-        Im Unternehmensplanspiel von GoodIT übernimmt der Spieler die Verantwortung eines IT-Projektes innerhalb der Softwareentwicklung. Dabei hat der Spieler die Rolle des Projektleiters inne. Sowohl die Anzahl als auch die Komplexität der Entscheidungen, die im Laufe des Planspiels getroffen werden müssen, erhöhen sich mit zuneh-mender Spieldauer. Bevor der Spieler eine Entscheidung im Unternehmensplanspiel treffen muss, werden dem Spieler entsprechende Lernmittel offeriert und ausgiebig die jeweilige IST-Situation des Projektes bzw. Unternehmens beschrieben. Dadurch wird die Spieldauer je nach Lernbedarf massiv variieren.
+        Im Unternehmensplanspiel von GoodIT übernimmt der Spieler die Verantwortung eines IT-Projektes innerhalb der Softwareentwicklung. Dabei hat der Spieler die Rolle des Projektleiters inne. Sowohl die Anzahl als auch die Komplexität der Entscheidungen, die im Laufe des Planspiels getroffen werden müssen, erhöhen sich mit zunehmender Spieldauer. Bevor der Spieler eine Entscheidung im Unternehmensplanspiel treffen muss, werden dem Spieler entsprechende Lernmittel offeriert und ausgiebig die jeweilige IST-Situation des Projektes bzw. Unternehmens beschrieben. Dadurch wird die Spieldauer je nach Lernbedarf massiv variieren.
     </p>
     <p>
         Dem Spieler werden zu jeder Fragesituation vorgegebene Antwortmöglichkeiten angeboten, die entsprechend ihrer Auswirkung auf das Gesamtspielergebnis klassifiziert sind.

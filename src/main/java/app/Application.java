@@ -2,6 +2,8 @@ package app;
 
 
 import app.dashboard.DashboardController;
+import app.dashboard.DashboardDao;
+import app.dashboard.DashboardDaoImpl;
 import app.game.GameController;
 import app.game.GameDao;
 import app.game.GameDaoImpl;
@@ -11,6 +13,7 @@ import app.user.UserController;
 import app.user.UserDao;
 import app.user.UserDaoImpl;
 import app.util.Filters;
+import app.util.FreeMarkerEngine;
 import app.util.MessageBundle;
 import app.util.Path;
 import freemarker.cache.ClassTemplateLoader;
@@ -19,7 +22,6 @@ import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.debug.DebugScreen;
-import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +39,8 @@ public class Application {
 
     public static UserDao userDao;
     public static GameDao gameDao;
+    public static DashboardDao dashboardDao;
+
     public static  FreeMarkerEngine freeMarkerEngine;
 
     public static void main(String args[]) {
@@ -62,6 +66,7 @@ public class Application {
 
                 userDao = new UserDaoImpl(sql2o);
                 gameDao = new GameDaoImpl(sql2o);
+                dashboardDao = new DashboardDaoImpl(sql2o);
 
                 System.out.println(userDao.getAllUsers());
 
