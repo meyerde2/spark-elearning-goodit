@@ -27,34 +27,27 @@ import static app.util.RequestUtil.*;
 public class GameController {
 
     public static Route serveGamePage = (Request request, Response response) -> {
+
         LoginController.ensureUserIsLoggedIn(request, response);
 
         if (clientAcceptsHtml(request)) {
-            Map attributes = new HashMap<>();
+
+            Map<String, Object> attributes = new HashMap<>();
+
             attributes.putAll(ViewUtil.getTemplateVariables(request));
             attributes.put("currentPage", "game");
 
-
             String currentUsername = request.session().attribute("currentUser");
-
-            System.out.println("currentUsername serveGamePage:  " + currentUsername);
-            Question question = gameDao.getNextQuestion(currentUsername);
-
             userDao.getAllUsers();
 
-            //is the current game at the end?
+            Question question = gameDao.getNextQuestion(currentUsername);
+            //end of game?
             if (question == null || userDao.getUserByUsername(currentUsername).getOpenGameId() == 0){
-                System.out.println("question: " +question + "  - getopengameid:  " + userDao.getUserByUsername(currentUsername).getOpenGameId());
-
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAMEEND));
-
             }else{
-
                 attributes.put("question", question);
                 attributes.put("questionCount", gameDao.getAllQuestions().size());
-
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAME));
-
             }
 
         }
@@ -182,8 +175,6 @@ public class GameController {
     };
 
 
-
-
     public static Route evaluateGameScore = (Request request, Response response) -> {
         LoginController.ensureUserIsLoggedIn(request, response);
 
@@ -192,16 +183,13 @@ public class GameController {
             attributes.putAll(ViewUtil.getTemplateVariables(request));
             attributes.put("currentPage", "gamecontrol");
 
-
             System.out.println("Hello GameScore");
 
             String currentUsername = request.session().attribute("currentUser");
 
-
             int questionId = Integer.parseInt(request.queryParams("id"));
 
             Question currentQuestion = gameDao.getQuestionById(questionId);
-
 
             int currentAnswer = Integer.parseInt(request.queryParams("answer"));
             int currentCategory;
@@ -271,6 +259,7 @@ public class GameController {
 
                 response.redirect(Path.Web.GAME);
             }
+
             return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAME));
 
         }
@@ -279,8 +268,6 @@ public class GameController {
         }
         return ViewUtil.notAcceptable.handle(request, response);
     };
-
-
 
     public static Route restartGame = (Request request, Response response) -> {
         LoginController.ensureUserIsLoggedIn(request, response);

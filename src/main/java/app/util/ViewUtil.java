@@ -60,7 +60,7 @@ public class ViewUtil {
 
     public static Map getTemplateVariables(Request request){
 
-        Map attributes = new HashMap<>();
+        Map<String, Object> attributes = new HashMap<>();
 
         attributes.put("loggedOut", removeSessionAttrLoggedOut(request));
         attributes.put("loginRedirect", removeSessionAttrLoginRedirect(request));

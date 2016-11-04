@@ -32,6 +32,13 @@
     background-color: #f5f5f5;
 }
 
+.fileUploads{
+    margin-left: 10px !important;
+    padding-left: 10px !important;
+    margin-right: 10px !important;
+    padding-right: 10px !important;
+}
+
 
 .answers div{
     margin:10px;

@@ -73,7 +73,8 @@ public class UnitTest {
 
         int gameResultValue = ((int) Math.round(d));
 
-        System.out.println("filter:  " + dashboardDao.getAllGameResults().stream().filter(g -> (g.getResult() == 1)).count());
+        System.out.println("filter:  " + dashboardDao.getAllGameResults().stream().filter(g -> (g.getEndresult() == 1)).count());
+
     }
 
 }

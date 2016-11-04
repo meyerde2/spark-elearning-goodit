@@ -171,44 +171,24 @@ public class GameDaoImpl implements GameDao{
 
         User user = userDao.getUserByUsername(username);
 
-        int userId = user.getId();
-
-        System.out.println("userId:  " + userId + " - - - - openGameID:  " +user.getOpenGameId());
-
-        String sqlGame = "SELECT * FROM games WHERE userId =" + userId +" AND openGameId = " + user.getOpenGameId() + " ;";
+        String sqlGame = "SELECT * FROM games WHERE userId =" + user.getId() +" AND openGameId = " + user.getOpenGameId() + " ;";
 
         try (Connection conn = sql2o.open()) {
 
             gameList = conn.createQuery(sqlGame).executeAndFetch(Game.class);
-
             questionList = getAllQuestions();
 
-            int i;
-
-            if (gameList.size() == 0 ){
-                i = 0;
-            }else {
-                i = gameList.size();
-            }
-
-            System.out.println("gameListSize:  " + gameList.size());
-
-
             if (gameList.size() == 0){
-                System.out.println("gameList == 0 ");
-                //pretty bad if you want to control the game by isActive parameter
+                //start the game with the first question
                 return getQuestionById(1);
             }else if (gameList.size() >= questionList.size()){
-                //Planspiel nun durchgespielt.
-                System.out.println("Planspiel durchgespielt");
+                //end of game
                 return null;
             }else{
-                System.out.println("nextQuestion-Frage:  " + questionList.get(i).getQuestion());
-                return questionList.get(i);
+                //get next question
+                return questionList.get(gameList.size());
             }
-
         }
-
     }
 
     @Override
@@ -239,8 +219,8 @@ public class GameDaoImpl implements GameDao{
     public boolean saveGame(Game game) {
 
         String sql =
-                "INSERT INTO games(questionId, userId, result, openGameId) " +
-                        "VALUES (:questionId, :userId, :result, :openGameId);";
+                "INSERT INTO games(questionId, userId, endresult, openGameId) " +
+                        "VALUES (:questionId, :userId, :endresult, :openGameId);";
 
         try (Connection con = sql2o.open()) {
 
@@ -249,7 +229,7 @@ public class GameDaoImpl implements GameDao{
             con.createQuery(sql)
                     .addParameter("questionId", game.getQuestionId())
                     .addParameter("userId", game.getUserId())
-                    .addParameter("result", game.getResult())
+                    .addParameter("endresult", game.getResult())
                     .addParameter("openGameId", game.getOpengameId())
                     .executeUpdate();
 
@@ -268,8 +248,8 @@ public class GameDaoImpl implements GameDao{
         //ToDo: openGameId zu gameId abändern!
 
         String sql =
-                "INSERT INTO gameresult(userId, result, openGameId) " +
-                        "VALUES (:userId, :result, :openGameId);";
+                "INSERT INTO gameresult(userId, endresult, gameId) " +
+                        "VALUES (:userId, :endresult, :gameId);";
 
         try (Connection con = sql2o.open()) {
 
@@ -277,8 +257,8 @@ public class GameDaoImpl implements GameDao{
 
             con.createQuery(sql)
                     .addParameter("userId", gameResult.getUserId())
-                    .addParameter("result", gameResult.getResult())
-                    .addParameter("openGameId", gameResult.getOpengameId())
+                    .addParameter("endresult", gameResult.getEndresult())
+                    .addParameter("gameId", gameResult.getGameId())
                     .executeUpdate();
 
             return true;

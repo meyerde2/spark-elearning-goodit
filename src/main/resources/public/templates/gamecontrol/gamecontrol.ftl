@@ -164,11 +164,12 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+            <div class="fileUploads">
+                <label for="fileUpload">Dateiupload</label>
+                <input type="file" class="form-control" id="fileUpload" >
+                <small id="fileUpload" class="form-text text-muted">Noch nicht funktionsfähig.</small>
+            </div>
         </div>
-
 
         </div>
         <div class="col-md-6">

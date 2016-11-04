@@ -50,9 +50,9 @@ public class DashboardController {
 
 
             List<GameResult> gameResultList = dashboardDao.getAllGameResults();
-            attributes.put("resultCategory1", gameResultList.stream().filter(g -> (g.getResult() == 1)).count());
-            attributes.put("resultCategory2", gameResultList.stream().filter(g -> (g.getResult() == 2)).count());
-            attributes.put("resultCategory3", gameResultList.stream().filter(g -> (g.getResult() == 3)).count());
+            attributes.put("resultCategory1", gameResultList.stream().filter(g -> (g.getEndresult() == 1)).count());
+            attributes.put("resultCategory2", gameResultList.stream().filter(g -> (g.getEndresult() == 2)).count());
+            attributes.put("resultCategory3", gameResultList.stream().filter(g -> (g.getEndresult() == 3)).count());
             attributes.put("numberOfTotalResults", gameResultList.size());
 
             return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.DASHBOARD));
