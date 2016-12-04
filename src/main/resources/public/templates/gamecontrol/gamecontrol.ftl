@@ -115,7 +115,7 @@
 
                 <div class="col-md-3">
                     <label for="answer4">${msg.get("PLANSPIEL_ANSWER4")}</label>
-                    <input type="text" name="answer4" class="form-control" placeholder="${msg.get("PLANSPIEL_ANSWER4")}" value="" required>
+                    <input type="text" name="answer4" class="form-control" placeholder="${msg.get("PLANSPIEL_ANSWER4")}" value="" >
                 </div>
                 <div class="col-md-3">
                     <label for="category4">Kategorie 4</label>
@@ -132,7 +132,7 @@
             <div class="form-group">
             <div class="col-md-3">
                 <label for="answer5">${msg.get("PLANSPIEL_ANSWER5")}</label>
-                <input type="text" name="answer5" class="form-control" placeholder="${msg.get("PLANSPIEL_ANSWER5")}" value="" required>
+                <input type="text" name="answer5" class="form-control" placeholder="${msg.get("PLANSPIEL_ANSWER5")}" value="" >
             </div>
                 <div class="col-md-3">
                  <label for="category1">Kategorie 5</label>
@@ -149,7 +149,7 @@
 
             <div class="form-group">
                <label for="active">${msg.get("PLANSPIEL_IS_ACTIVE")}</label>
-               <input type="checkbox" name="active" id="active" class="" placeholder="${msg.get("PLANSPIEL_IS_ACTIVE")}" value="true" required>
+               <input type="checkbox" name="active" id="active" class="" placeholder="${msg.get("PLANSPIEL_IS_ACTIVE")}" value="true">
             </div>
 
         </div>

@@ -1,4 +1,5 @@
 <#macro masterTemplate title="">
+<#if msg??>
     <html>
     <head>
         <title>${msg.get("COMMON_TITLE")}</title>
@@ -94,4 +95,6 @@
 
        </body>
     </html>
+
+</#if>
 </#macro>

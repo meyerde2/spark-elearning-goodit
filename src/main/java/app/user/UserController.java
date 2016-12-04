@@ -20,9 +20,6 @@ import static app.util.RequestUtil.clientAcceptsJson;
 import static app.util.RequestUtil.getParamUsername;
 
 
-/**
- * Created by Dennis on 29.09.2016.
- */
 public class UserController {
 
 
@@ -70,6 +67,7 @@ public class UserController {
                 attributes.putAll(ViewUtil.getTemplateVariables(request));
                 attributes.put("currentPage", "usercontrol");
 
+                attributes.put("pwNotEqual", false);
 
                 attributes.put("users", userDao.getAllUsers());
 
@@ -109,13 +107,24 @@ public class UserController {
 
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.put("users", userDao.getAllUsers());
+                attributes.put("currentPage", "usercontrol");
 
+                attributes.put("pwNotEqual", false);
                 response.redirect(Path.Web.USERCONTROL);
 
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.USERCONTROL));
 
             }else{
-                return false;
+
+                System.out.println("PW not equal!!!!!!!!");
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("users", userDao.getAllUsers());
+                attributes.put("pwNotEqual", true);
+                attributes.put("currentPage", "usercontrol");
+
+                response.redirect(Path.Web.USERCONTROL);
+
+                return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.USERCONTROL));
             }
 
         }

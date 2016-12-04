@@ -1,8 +1,6 @@
 package app.dashboard;
 
-/**
- * Created by Dennis on 16.10.2016.
- */
+
 public class PlayedQuestion {
     int questionId;
     int playScore;

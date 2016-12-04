@@ -2,9 +2,7 @@ package app.user;
 
 import java.util.List;
 
-/**
- * Created by Dennis on 29.09.2016.
- */
+
 public interface UserDao {
 
     List<User> getAllUsers();

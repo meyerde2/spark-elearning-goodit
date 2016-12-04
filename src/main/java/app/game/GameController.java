@@ -21,9 +21,7 @@ import static app.user.UserController.getCurrentUserRole;
 import static app.util.JsonUtil.dataToJson;
 import static app.util.RequestUtil.*;
 
-/**
- * Created by Dennis on 29.09.2016.
- */
+
 public class GameController {
 
     public static Route serveGamePage = (Request request, Response response) -> {
@@ -45,8 +43,18 @@ public class GameController {
             if (question == null || userDao.getUserByUsername(currentUsername).getOpenGameId() == 0){
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAMEEND));
             }else{
+                int questionPosition = 0;
+                int i = 0;
+
+                for (Question q : gameDao.getAllActiveQuestions()) {
+                    i++;
+                    if (q.getId() == question.getId()){
+                        questionPosition = i;
+                    }
+                }
+                attributes.put("currentQuestionPosition", questionPosition);
                 attributes.put("question", question);
-                attributes.put("questionCount", gameDao.getAllQuestions().size());
+                attributes.put("questionCount", gameDao.getAllActiveQuestions().size());
                 return Application.freeMarkerEngine.render(new ModelAndView(attributes, Path.Template.GAME));
             }
 
@@ -88,7 +96,6 @@ public class GameController {
             Map<String, Object> attributes = new HashMap<>();
             attributes.putAll(ViewUtil.getTemplateVariables(request));
 
-            System.out.println("before object-parsing");
 
             System.out.println("situation:" + request.queryParams("situation"));
             System.out.println("question:" + request.queryParams("question"));
@@ -97,7 +104,7 @@ public class GameController {
             System.out.println("active:" + request.queryParams("active"));
 
             boolean active = false;
-            if (request.queryParams("active").equals("true")){
+            if ("true".equals(request.queryParams("active"))){
                 active = true;
             }
 
@@ -106,7 +113,6 @@ public class GameController {
                    Integer.parseInt(request.queryParams("category3")), request.queryParams("answer4"), Integer.parseInt(request.queryParams("category4")), request.queryParams("answer5"),
                    Integer.parseInt(request.queryParams("category5")), "files", active);
 
-            System.out.println("before database");
             //send question to datebase
             gameDao.createNewQuestion(question);
 
@@ -183,8 +189,6 @@ public class GameController {
             attributes.putAll(ViewUtil.getTemplateVariables(request));
             attributes.put("currentPage", "gamecontrol");
 
-            System.out.println("Hello GameScore");
-
             String currentUsername = request.session().attribute("currentUser");
 
             int questionId = Integer.parseInt(request.queryParams("id"));
@@ -218,7 +222,6 @@ public class GameController {
             userDao.getAllUsers();
             User currentUser = userDao.getUserByUsername(currentUsername);
 
-            System.out.println("openGameID: bevor es gespeichert wird:  " + currentUser.getOpenGameId());
             Game currentGame = new Game(0, currentQuestion.getId(), currentUser.getId(), currentCategory, currentUser.getOpenGameId());
 
             gameDao.saveGame(currentGame);
@@ -282,7 +285,6 @@ public class GameController {
             //set new openGameId
             int opengameId = userDao.getLatestOpengameId(currentUsername) + 1 ;
 
-            System.out.println("opengamedID im Restart + 1:  " + opengameId);
 
             User currentUser = userDao.getUserByUsername(currentUsername);
 

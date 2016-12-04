@@ -4,9 +4,7 @@ import app.game.Game;
 
 import java.util.List;
 
-/**
- * Created by Dennis on 29.09.2016.
- */
+
 public interface DashboardDao {
 
     Game getCurrentGameProgress(String username);
@@ -19,6 +17,7 @@ public interface DashboardDao {
 
     //Diagramm 1: Aktuller Spielfortschritt
     int getNumberOfAllQuestions();
+    int getNumberOfAllActiveQuestions();
 
     int getTotalNumberOfAllPlayedGames();
 }

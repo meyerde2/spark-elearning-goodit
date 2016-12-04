@@ -6,9 +6,7 @@ import org.sql2o.Sql2o;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Dennis on 04.10.2016.
- */
+
 public class UserDaoImpl implements UserDao{
 
     private Sql2o sql2o;

@@ -9,9 +9,7 @@ import org.sql2o.Sql2o;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Dennis on 05.10.2016.
- */
+
 public class DashboardDaoImpl implements DashboardDao {
 
     private Sql2o sql2o;
@@ -66,7 +64,7 @@ public class DashboardDaoImpl implements DashboardDao {
 
             for (int i = 1; i <= numberOfQuestions; i++){
 
-                String sql = "SELECT COUNT(questionId) FROM games WHERE questionId ="+ i +";";
+                String sql = "SELECT COUNT(questionId) FROM games WHERE questionId ="+ i +" ;";
 
                 count = Integer.parseInt(conn.createQuery(sql).executeScalar().toString());
 
@@ -111,13 +109,27 @@ public class DashboardDaoImpl implements DashboardDao {
     }
 
     @Override
+    public int getNumberOfAllActiveQuestions() {
+        int numberOfQuestions;
+
+        try (Connection conn = sql2o.open()) {
+
+            String sqlGetNumberOfQuestions = "SELECT COUNT(id) FROM questions WHERE isActive=1";
+            numberOfQuestions = Integer.parseInt(conn.createQuery(sqlGetNumberOfQuestions).executeScalar().toString());
+
+        }
+
+        return numberOfQuestions;
+    }
+
+    @Override
     public int getTotalNumberOfAllPlayedGames() {
 
         int totalNumberOfAllPlayedGames;
 
         try (Connection conn = sql2o.open()) {
 
-            String sqltotalNumberOfAllPlayedQuestions = "SELECT COUNT(id) FROM games WHERE questionId = 1";
+            String sqltotalNumberOfAllPlayedQuestions = "SELECT COUNT(DISTINCT userId, openGameId) FROM games";
             totalNumberOfAllPlayedGames = Integer.parseInt(conn.createQuery(sqltotalNumberOfAllPlayedQuestions).executeScalar().toString());
 
         }

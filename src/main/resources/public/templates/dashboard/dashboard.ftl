@@ -6,9 +6,9 @@
     <h2>Mein aktueller Spielfortschritt</h2>
 
     <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<#if lastPlayedQuestion??>${lastPlayedQuestion.getQuestionId()}<#else>0</#if>"
-            aria-valuemin="0" aria-valuemax="${numberOfAllQuestions}" style="width:<#if lastPlayedQuestion??>${(lastPlayedQuestion.getQuestionId() / numberOfAllQuestions * 100)?c}<#else>0</#if>%">
-            Frage <#if lastPlayedQuestion??>${lastPlayedQuestion.getQuestionId()}<#else>0</#if> von ${numberOfAllQuestions}
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<#if currentQuestionPosition??>${currentQuestionPosition}<#else>0</#if>"
+            aria-valuemin="0" aria-valuemax="${numberOfAllActiveQuestions}" style="width:<#if currentQuestionPosition??>${(currentQuestionPosition / numberOfAllActiveQuestions * 100)?c}<#else>0</#if>%">
+            Frage <#if currentQuestionPosition??>${currentQuestionPosition}<#else>0</#if> von ${numberOfAllActiveQuestions}
         </div>
     </div>
 
@@ -19,7 +19,7 @@
 			<#items as playedQuestion>
 
                 <div class="text-md-center" id="currentGameProgress">
-                    <#if playedQuestion??>Frage ${playedQuestion.getQuestionId()}<#else>0</#if> von ${numberOfAllQuestions}: Wurde bisher <#if playedQuestion??>${playedQuestion.getPlayScore()}<#else>0</#if> Mal in ${totalNumberOfAllPlayedGames} gestarteten Planspielen beantwortet.
+                    <#if playedQuestion??>Frage ${playedQuestion.getQuestionId()}<#else>0</#if> von ${numberOfAllQuestions}: Wurde bisher <#if playedQuestion??>${playedQuestion.getPlayScore()}<#else>0</#if> Mal in ${totalNumberOfAllPlayedGames} gestarteten Planspielen beantwortet/gespielt.
                 </div>
 
                 <div class="progress">

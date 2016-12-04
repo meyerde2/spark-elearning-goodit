@@ -17,51 +17,52 @@
         Gegenwärtig soll bei GoodIT eine neue mobile Applikation erstellt werden, welche es nun zu planen und umzusetzen gilt:</p>
     </div>
 
-    <div class="description">
-        <h2>${msg.get("PLANSPIEL_NEW_SITUATION")}</h2>
-        ${question.getDescription()}
-    </div>
+    <#if question??>
 
-    <div>
-        <h3>Frage: ${question.getId()} von ${questionCount} </h3>
-        <h4>${question.getQuestion()}</h4>
-    </div>
-
-    <form id="answer" name="answer" action="/gamescore/" method="post">
-
-        <input type="hidden" name="id" value="${question.getId()}">
-
-        <div class="answers">
-            <div>
-                <label class="radio-inline"><input type="radio" name="answer" value="1" required>${question.getAnswer1()}</label>
-            </div>
-            <div>
-                <label class="radio-inline"><input type="radio" name="answer" value="2">${question.getAnswer2()}</label>
-            </div>
-            <div>
-                <label class="radio-inline"><input type="radio" name="answer" value="3">${question.getAnswer3()}</label>
-            </div>
-            <#if question.getAnswer4()?has_content>
-                <div>
-                 <label class="radio-inline"><input type="radio" name="answer" value="4">${question.getAnswer4()}</label>
-                </div>
-            </#if>
-
-            <#if question.getAnswer5()?has_content>
-                <div>
-                    <label class="radio-inline"><input type="radio" name="answer" value="5">${question.getAnswer5()}</label>
-                </div>
-            </#if>
+        <div class="description">
+            <h2>${msg.get("PLANSPIEL_NEW_SITUATION")}</h2>
+            ${question.getDescription()}
         </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-md">
-                <span class="glyphicon glyphicon-ok"></span> antworten
-            </button>
-
+        <div>
+            <h3>Frage: <#if currentQuestionPosition??>${currentQuestionPosition}</#if> von <#if questionCount??>${questionCount}</#if></h3>
+            <h4>${question.getQuestion()}</h4>
         </div>
 
-    </form>
+        <form id="answer" name="answer" action="/gamescore/" method="post">
 
+            <input type="hidden" name="id" value="${question.getId()}">
 
+            <div class="answers">
+                <div>
+                    <label class="radio-inline"><input type="radio" name="answer" value="1" required>${question.getAnswer1()}</label>
+                </div>
+                <div>
+                    <label class="radio-inline"><input type="radio" name="answer" value="2">${question.getAnswer2()}</label>
+                </div>
+                <div>
+                    <label class="radio-inline"><input type="radio" name="answer" value="3">${question.getAnswer3()}</label>
+                </div>
+                <#if question.getAnswer4()?has_content>
+                    <div>
+                     <label class="radio-inline"><input type="radio" name="answer" value="4">${question.getAnswer4()}</label>
+                    </div>
+                </#if>
+
+                <#if question.getAnswer5()?has_content>
+                    <div>
+                        <label class="radio-inline"><input type="radio" name="answer" value="5">${question.getAnswer5()}</label>
+                    </div>
+                </#if>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-md">
+                    <span class="glyphicon glyphicon-ok"></span> antworten
+                </button>
+
+            </div>
+
+        </form>
+    </#if>
 </@layout.masterTemplate>

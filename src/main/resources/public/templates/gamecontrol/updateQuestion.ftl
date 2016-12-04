@@ -112,7 +112,7 @@
 
             <div class="form-group">
                <label for="active">${msg.get("PLANSPIEL_IS_ACTIVE")}</label>
-               <input type="checkbox" name="active" id="active" class="" <#if question.isActive() == true> checked </#if> placeholder="${msg.get("PLANSPIEL_IS_ACTIVE")}" value="true" required>
+               <input type="checkbox" name="active" id="active" class="" <#if question.isActive() == true> checked </#if> placeholder="${msg.get("PLANSPIEL_IS_ACTIVE")}" value="true">
             </div>
 
         </div>

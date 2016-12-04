@@ -5,7 +5,9 @@
 <h2>${msg.get("USER_UPDATE")}</h2>
 
 <form action="/updateUser/" id="userForm" method="post">
+<div class="error">
 
+</div>
     <div class="form-group">
         <label for="username">${msg.get("USER_USERNAME")}</label>
         <input type="text" name="username"  class="form-control" placeholder="${msg.get("USER_USERNAME")}" value="${user.getUsername()}" readonly>
@@ -24,12 +26,12 @@
 
     <div class="form-group">
         <label for="password">${msg.get("USER_PASSWORD")}</label>
-        <input type="password" name="password" class="form-control" placeholder="${msg.get("USER_PASSWORD_UPDATE")}" value="">
+        <input type="password" name="password" id="password" class="form-control" placeholder="${msg.get("USER_PASSWORD_UPDATE")}" value="">
     </div>
 
     <div class="form-group">
         <label for="password">${msg.get("USER_PASSWORD_CONFIRM")}</label>
-        <input type="password" name="passwordConfirmed" class="form-control" placeholder="${msg.get("USER_PASSWORD_CONFIRM_UPDATE")}" value="">
+        <input type="password" name="passwordConfirmed" id="passwordConfirmed" class="form-control" placeholder="${msg.get("USER_PASSWORD_CONFIRM_UPDATE")}" value="">
     </div>
 
     <div class="custom-controls-stacked">
@@ -52,8 +54,26 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" value="${msg.get("USER_UPDATE")}">
+        <input type="submit" name="submit" id="submit" class="btn btn-primary" value="${msg.get("USER_UPDATE")}">
     </div>
 </form>
+
+
+<script>
+$(document).ready(function(){
+	$("#submit").click(function(){
+		var pw = $("#password").val();
+		var pwConfirmed = $("#passwordConfirmed").val();
+
+		 if (pw.length != 0 && (pw != pwConfirmed || pw.length <6 )) {
+			event.preventDefault();
+
+			$(".error").html("<p class='btn-lg btn-danger bad notification'>Passwörter ungleich oder zu kurz</p>");
+		 }
+	});
+
+});
+</script>
+
 
 </@layout.masterTemplate>

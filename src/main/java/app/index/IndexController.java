@@ -1,9 +1,5 @@
 package app.index;
 
-/**
- * Created by Dennis on 29.09.2016.
- */
-
 import app.Application;
 import app.login.LoginController;
 import app.util.Path;

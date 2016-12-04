@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Created by Dennis on 06.10.2016.
- */
+
 @Data
 @AllArgsConstructor
 public class Game {

@@ -1,6 +1,7 @@
 package app.dashboard;
 
 import app.Application;
+import app.game.Question;
 import app.login.LoginController;
 import app.util.Path;
 import app.util.ViewUtil;
@@ -14,14 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 import static app.Application.dashboardDao;
+import static app.Application.gameDao;
 import static app.Application.userDao;
 import static app.util.JsonUtil.dataToJson;
 import static app.util.RequestUtil.clientAcceptsHtml;
 import static app.util.RequestUtil.clientAcceptsJson;
 
-/**
- * Created by Dennis on 29.09.2016.
- */
+
 public class DashboardController {
 
     public static Route serveDashboardPage = (Request request, Response response) -> {
@@ -36,8 +36,25 @@ public class DashboardController {
             attributes.putAll(ViewUtil.getTemplateVariables(request));
             attributes.put("currentPage", "dashboard");
 
+
             //Dashboard-Diagram 1: Mein aktueller Spielfortschritt?
+            attributes.put("numberOfAllActiveQuestions", dashboardDao.getNumberOfAllActiveQuestions());
+
             attributes.put("numberOfAllQuestions", dashboardDao.getNumberOfAllQuestions());
+
+            String currentUsername = request.session().attribute("currentUser");
+            Question question = gameDao.getNextQuestion(currentUsername);
+            int questionPosition = 0;
+            int i = 0;
+            for (Question q : gameDao.getAllActiveQuestions()) {
+
+                if (q.getId() == question.getId()){
+                    questionPosition = i;
+                }
+                i++;
+            }
+
+            attributes.put("currentQuestionPosition", questionPosition);
             attributes.put("lastPlayedQuestion", dashboardDao.getCurrentGameProgress(request.session().attribute("currentUser")));
 
             //Dashboard-Diagram 2: Wie oft wurde welche Frage gespielt?

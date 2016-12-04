@@ -17,7 +17,6 @@ import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import org.sql2o.Sql2o;
 import spark.Spark;
-import spark.debug.DebugScreen;
 import spark.servlet.SparkApplication;
 
 import static spark.Spark.*;
@@ -30,10 +29,9 @@ public class Application implements SparkApplication{
     public static GameDao gameDao;
     public static DashboardDao dashboardDao;
 
-    public static  FreeMarkerEngine freeMarkerEngine;
+    public static FreeMarkerEngine freeMarkerEngine;
 
-
-    /*
+/*
     public static void main(String args[]) {
 
         Spark.staticFileLocation("/public");
@@ -105,6 +103,7 @@ public class Application implements SparkApplication{
         after("*", Filters.addGzipHeader);
 
     }
+
 */
 
     @Override
@@ -112,7 +111,7 @@ public class Application implements SparkApplication{
         Spark.staticFileLocation("/public");
 
         //Test
-        DebugScreen.enableDebugScreen();
+        //DebugScreen.enableDebugScreen();
 
         freeMarkerEngine = new FreeMarkerEngine();
         Configuration freeMarkerConfiguration = new Configuration();
@@ -177,6 +176,5 @@ public class Application implements SparkApplication{
         after("*", Filters.addGzipHeader);
 
     }
-
 
 }
